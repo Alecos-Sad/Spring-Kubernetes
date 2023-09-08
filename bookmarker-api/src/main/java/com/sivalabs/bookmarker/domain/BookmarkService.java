@@ -21,4 +21,14 @@ public class BookmarkService {
         Page<BookmarkDTO> bookmarkPage = bookmarkRepository.findBookmarks(pageable);
         return new BookmarksDTO(bookmarkPage);
     }
+
+    @Transactional
+    public BookmarksDTO searchQuery(String query, Integer page) {
+        int pageNo = page < 1 ? 0 : page - 1;
+        Pageable pageable = PageRequest.of(pageNo, 10, Sort.Direction.DESC, "createdAt");
+        Page<BookmarkDTO> bookmarkPage = bookmarkRepository.searchQuery(query, pageable);
+        //вместо dto можно использовать интерфейс BookmarkVM. Hibernate сам создаст прокси и будет такая виртуальная dto.
+        Page<BookmarkVM> bookmarkVMPage = bookmarkRepository.findByTitleContainingIgnoreCase(query, pageable);
+        return new BookmarksDTO(bookmarkPage);
+    }
 }
