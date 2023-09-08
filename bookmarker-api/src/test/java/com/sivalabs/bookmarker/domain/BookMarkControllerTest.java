@@ -50,7 +50,8 @@ class BookMarkControllerTest {
         bookmarks.add(new Bookmark(null, "baeldung", "https://www.baeldung.com", Instant.now()));
         bookmarks.add(new Bookmark(null, "devglan", "https://www.devglan.com", Instant.now()));
         bookmarks.add(new Bookmark(null, "linuxize", "https://linuxize.com", Instant.now()));
-        bookmarkRepository.saveAll(bookmarks);
+        List<Bookmark> bookmarks1 = bookmarkRepository.saveAll(bookmarks);
+        System.out.println("save");
     }
 
     @ParameterizedTest
