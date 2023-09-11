@@ -1,11 +1,10 @@
 package com.sivalabs.bookmarker.domain;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,5 +23,11 @@ public class BookMarkController {
         } else {
             return bookmarkService.searchQuery(query, page);
         }
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public BookmarkDTO createBookmark(@RequestBody @Valid CreateBookmarkRequest request){
+        return bookmarkService.createBookmark(request);
     }
 }
