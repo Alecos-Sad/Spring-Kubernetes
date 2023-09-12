@@ -1,0 +1,2 @@
+Add profile local into edit configuration of main class.
+Write in line Active Profiles - local
